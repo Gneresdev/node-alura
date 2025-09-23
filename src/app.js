@@ -1,24 +1,27 @@
 import express from "express";
+import cors from "cors"; // Importa o cors
 import conectaNaDatabase from "./config/dbconnect.js";
 import routes from "./routes/index.js";
 
 const conexao = await conectaNaDatabase();
 
 conexao.on("error", (erro) => {
-  console.error("erro de conexao", erro);
+  console.error("Erro de conexão", erro);
 });
 
-conexao.on("open", () => {
-  console.log("conexao com o banco feita com sucesso");
+conexao.once("open", () => {
+  console.log("Conexão com o banco feita com sucesso");
 });
 
 const app = express();
+
+app.use(cors()); // Ativa CORS para todas as rotas
+app.use(express.json()); // Habilita o parsing de JSON no corpo da requisição
+
 routes(app);
 
-app.delete("/livros/:id", (req, res) => {
-  const index = buscaLivro(req.params.id);
-  livros.splice(index, 1);
-  res.status(200).send("Livro removido com sucesso.");
-});
+// A parte do app.delete com buscaLivro e livros parece que está incompleta,
+// e pode estar conflitando com o que já está nas rotas, então recomendo remover isso daqui
+// caso você já tenha a rota DELETE configurada dentro do controller e routes.
 
 export default app;

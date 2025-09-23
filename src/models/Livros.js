@@ -9,6 +9,11 @@ const livroSchema = new mongoose.Schema(
     preco: { type: Number },
     paginas: { type: Number },
     autor: autorSchema,
+    sinopse: { type: String }, // <-- Adicionado
+    tipo: { type: String }, // <-- Adicionado
+    categoria: { type: String }, // <-- Adicionado
+    idioma: { type: String }, // <-- Adicionado
+    imagemUrl: { type: String }, // <-- Adicionado
   },
   { versionKey: false }
 );
