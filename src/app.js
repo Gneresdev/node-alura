@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors"; // Importa o cors
 import conectaNaDatabase from "./config/dbconnect.js";
 import routes from "./routes/index.js";
+import userRoutes from "./routes/userRoutes.js";
 
 const conexao = await conectaNaDatabase();
 
@@ -17,6 +18,7 @@ const app = express();
 
 app.use(cors()); // Ativa CORS para todas as rotas
 app.use(express.json()); // Habilita o parsing de JSON no corpo da requisição
+app.use(userRoutes);
 
 routes(app);
 
